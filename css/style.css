@@ -1,0 +1,120 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-color:ivory;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    border-style: none;
+    padding: 0;
+}
+
+.wrapper {
+    display: grid;
+    min-width: 60%;
+    width: 60%;
+    max-width: 60%;
+    max-height: 90%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    gap: 1em;
+    margin: auto;
+    place-items: center;
+    grid-auto-columns: 33%;
+    grid-template-areas: 
+    ". enemyPicture ."
+    ". enemyPick ."
+    ". stateText ."
+    ". score ."
+    "rock paper scissors";
+    grid-template-rows: auto auto 1fr 1fr 1fr auto auto;
+}
+
+#enemyPicture {
+    grid-area: enemyPicture;
+}
+
+#enemyPicture > img {
+    border-radius: 10px;
+}
+
+#enemyPick {
+    grid-area: enemyPick;
+}
+
+#stateText {
+    grid-area: stateText;
+    border-style: double;
+    text-align: center;
+    font-size: 24px;
+    height: 1em;
+    width: 10em;
+    margin: 5px;
+    padding: 5px;
+}
+
+#score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2em;
+    grid-area: score;
+    font-size: 64px;
+    height: 1em;
+    width: 3em;
+    text-align: center;
+}
+
+#playerScore {
+    color: lime;
+}
+
+#enemyScore {
+    color: red;
+}
+
+#rock {
+    grid-area: rock;
+    cursor: pointer;
+}
+
+#paper {
+    grid-area: paper;
+    cursor: pointer;
+}
+
+#scissors {
+    grid-area: scissors;
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 25rem;
+    max-height: 25rem;
+    width: 70%;
+    height: 70%;
+    min-width: 70%;
+    min-height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#enemyPick > img {
+    max-width: 17rem;
+    max-height: 17rem;
+}
+
+.selected {
+    border: 2px;
+    border-style: solid;
+    border-color: red;
+}
