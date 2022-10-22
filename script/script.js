@@ -8,14 +8,32 @@ const enemyScoreText = document.getElementById('enemyScore')
 let playerScore = 0
 let enemyScore = 0
 
+for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", function(event) {
+        startGame(this.id)
+    })
+}
+
 const startGame = (playerChoice) => {
     enemyChoice = Math.floor(Math.random() * 3)
-    let state = ""
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].classList.remove('selected')
     }
 
+    updateButtons(playerChoice)
+
+    getGameState(playerChoice, enemyChoice)
+
+    updateScore(playerScore, enemyScore)
+}
+
+const updateScore = (playerScore, enemyScore) => {
+    playerScoreText.innerHTML = playerScore
+    enemyScoreText.innerHTML = enemyScore
+}
+
+const updateButtons = (playerChoice) => {
     switch (playerChoice) {
         case "rock":
             buttons[0].classList.add('selected')
@@ -27,7 +45,29 @@ const startGame = (playerChoice) => {
             buttons[2].classList.add('selected')
             break
     }
+}
 
+const showGameOutcome = (state) => {
+    switch (state) {
+        case "tie":
+            enemyPicture.innerHTML = `<img src="images/tie.png" alt="Tie">`
+            stateText.innerHTML = `It's a tie!`
+            break
+        case "win":
+            enemyPicture.innerHTML = `<img src="images/enemyLose.png" alt="Lose">`
+            stateText.innerHTML = `Player wins!`
+            playerScore++
+            break
+        case "lose":
+            enemyPicture.innerHTML = `<img src="images/enemyWin.png" alt="Win">`
+            stateText.innerHTML = `Pepe wins!`
+            enemyScore++
+            break
+    }
+}
+
+const getGameState = (playerChoice, enemyChoice) => {
+    let state = ""
     switch (enemyChoice) {
         case 0:
             enemyPick.innerHTML = `<img src="images/enemyRock.png" alt="Rock">`
@@ -58,33 +98,5 @@ const startGame = (playerChoice) => {
             break
     }
 
-    switch (state) {
-        case "tie":
-            enemyPicture.innerHTML = `<img src="images/tie.png" alt="Tie">`
-            stateText.innerHTML = `It's a tie!`
-            break
-        case "win":
-            enemyPicture.innerHTML = `<img src="images/enemyLose.png" alt="Lose">`
-            stateText.innerHTML = `Player wins!`
-            playerScore++
-            break
-        case "lose":
-            enemyPicture.innerHTML = `<img src="images/enemyWin.png" alt="Win">`
-            stateText.innerHTML = `Pepe wins!`
-            enemyScore++
-            break
-    }
-
-    updateScore(playerScore, enemyScore)
-}
-
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", function(event) {
-        startGame(this.id)
-    })
-}
-
-const updateScore = (playerScore, enemyScore) => {
-    playerScoreText.innerHTML = playerScore
-    enemyScoreText.innerHTML = enemyScore
+    showGameOutcome(state)
 }
